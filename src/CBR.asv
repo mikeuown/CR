@@ -4,37 +4,70 @@ classdef CBR
     %   vida da técnica CBR
     % retrieve - reuse - revise - retain
     
-    properties
+    properties (Access = private)
         nomeFicheiro = 'cars.xlsx';
+        threshold;
         biblioteca_casos;
         novo_caso;
     end
     
-    methods (Access = public)
+    %Construtor Getters e Setters
+    methods
+        
+        %Construtor
         function this = CBR()
             %CBR contrutor da classe
             %obtem casos da biblioteca de casos do ficheiro com o nome
             %indicado no atributo da classe
+            
             this.biblioteca_casos = this.carregaBibliotecaCasos(this.nomeFicheiro);
+            
+            this.threshold = 0.9;
         end
         
-        
-        function retrieve()    
+        %obtem biblioteca de casos
+        function value = get.biblioteca_casos(this)
+            value = this.biblioteca_casos;
         end
         
-        function reuse()
+        %guarda novo caso
+        function this = set.novo_caso(this, novo_caso)
+            this.novo_caso = novo_caso;
+        end
+    end
+    
+    %metodos que representam cada fase do ciclo de vida CBR
+    methods (Access = public)
+       
+        %{
+        Função Retrieve
+
+        Obtem casos semelhantes da BD com base na função de semelhança
+        Develve os indices da tabela que tenham uma similiaridade superior ao
+        indicado na variavel threshold
+        %}
+        function [indices] = retrieve(~, caso_novo)
+            disp('fase retrive');      
+            
         end
         
-        function revise()
+        function reuse(~)
         end
         
-        function retain()
+        function revise(~)
+        end
+        
+        function retain(~)
         end
         
         
     end
     
+    %metodos auxiliares
     methods (Access = private)
+        
+        %==================== Funçoes auxiliares ==========================
+        
         %carrega biblioteca de casos
         function biblioteca_casos = carregaBibliotecaCasos(~, nomeFicheiro)
             %Obtem a libraria de casos do ficheiro indicado em forma de tabela
@@ -82,6 +115,143 @@ classdef CBR
             disp('biblioteca carregada');
             
         end
+        
+        
+        %=============== Tabela de semelhancas ===================
+        
+        %obtem tabela de semelhanças de fabricantes 
+        function fabricante_sim = get_fabricante_sim(~)
+            
+            fabricante_sim.categorias = categorical({'alfa-romero', 'audi', 'bmw', 'chevrolet', 'dodge', 'honda', 'isuzu', 'jaguar', 'mazda', 'mercedes-benz', 'mercury', 'mitsubishi', 'nissan', 'peugot', 'plymouth', 'porsche', 'renault', 'saab', 'subaru', 'toyota', 'volkswagen', 'volvo'});
+            
+            fabricante_sim.tabela_semelhancas = [
+                %   alfa-romero  audi  bmw   chevrolet  dodge   honda    isuzu   jaguar   mazda    mercedes-benz   mercury    mitsubishi  nissan    peugot  plymouth  porsche   renault    saab    subaru  toyota    volkswagen  volvo
+                        1.0           % alfa-romero  
+                        x         % audi
+                                   % bmw
+                                   % chevrolet
+                                   % dodge
+                                   % honda
+                                   % isuzu
+                                   % jaguar
+                                   % mazda
+                                   % mercedes-benz
+                                   % mercury
+                                   % mitsubishi
+                                   % nissan
+                                   % peugot
+                                   % plymouth
+                                   % porsche
+                                   % renault
+                                   % saab
+                                   % subaru  
+                                   % toyota    
+                                   % volkswagen  
+                                   % volvo
+                ];
+        end
+        
+        %obtem tabela de semelhanças do tipo de carrocari
+        function tipo_carrocaria_sim = get_tipo_carrocaria_sim(~)
+            
+            tipo_carrocaria_sim.categorias = categorical({'hardtop', 'wagon', 'sedan', 'hatchback', 'convertible'});
+            
+            tipo_carrocaria_sim.tabela_semelhancas = [
+                %   hardtop  wagon  sedan   hatchback  convertible
+                        1.0           % hardtop 
+                        x         % wagon
+                                   % sedan
+                                   % hatchback
+                                   % convertible
+                ];
+        end
+        
+        %obtem tabela de semelhanças do tipo de tracao
+        function tracao_sim = get_tracao_sim(~)
+            
+            tracao_sim.categorias = categorical({'4wd', 'fwd', 'rwd'});
+            
+            tracao_sim.tabela_semelhancas = [
+                %   4wd  fwd  rwd 
+                    1.0  0.5  0.5    % 4wd
+                         1.0       % fwd
+                              1.0 % rwd
+              
+                ];
+        end
+        
+        %obtem tabela de semelhanças dos tipos de motores
+        function tipo_motor_sim = get_tipo_motor_sim(~)
+            
+            tipo_motor_sim.categorias = categorical({'dohc', 'dohcv', 'l', 'ohc', 'ohcf', 'ohcv', 'rotor'});
+            
+            tipo_motor_sim.tabela_semelhancas = [
+                %   dohc  dohcv  l   ohc  ohcf  ohcv    rotor
+                1.0           % dohc
+                x         % dohcv
+                % l
+                % ohc
+                % ohcf
+                % ohcv
+                % rotor
+                ];
+        end
+        
+         %obtem tabela de semelhanças do numero de cilindros
+        function num_cilindros_sim = get_num_cilindros_sim(~)
+            
+            num_cilindros_sim.categorias = categorical({'eight', 'five', 'four', 'six', 'three', 'twelve', 'two'});
+            
+            num_cilindros_sim.tabela_semelhancas = [
+                %   eight  five  four   six  three  twelve    rotor
+                1.0           % eight
+                x         % five
+                % four
+                % six
+                % three
+                % twelve
+                % two
+                ];
+        end
+        
+          
+         %obtem tabela de semelhanças do sistema de combustivel
+        function sistema_combustivel_sim = get_sistema_combustivel_sim(~)
+            
+            sistema_combustivel_sim.categorias = categorical({'1bbl', '2bbl', '4bbl', 'idi', 'mfi', 'mpfi', 'spdi', 'spfi'});
+            
+            sistema_combustivel_sim.tabela_semelhancas = [
+                %   1bbl  2bbl  4bbl   idi  mfi  mpfi  spdi  spfi
+                1.0           % 1bbl
+                x         % 2bbl
+                % 4bbl
+                % idi
+                % mfi
+                % mpfi
+                % spdi
+                % spfi
+                ];
+        end
+        
+        
+        
+        
+        %======== Calcular semelhanca entre dois valores/atributos ========
+        
+        %calcula a distancia local entre dois atributos com base na tabela
+        %de semelhancas
+        function res = calcula_distancia_local(~,sim, val1, val2)
+            i1 = find(sim.categorias == val1);
+            i2 = find(sim.categorias == val2);
+            res = 1 - sim.tabela_semelhancas(i1,i2);
+        end
+        
+        %calcula distancia euclidiana entre dois inteiros
+        function res = calcula_distancia_euclidiana(~, val1, val2)
+            dif = val1 - val2;
+            res = sqrt(dif * dif);
+        end
+        
     end
     
 end
