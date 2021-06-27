@@ -11,7 +11,7 @@ classdef CBR
         novo_caso;
     end
     
-    %Construtor Getters e Setters
+    %Construtor, Getters e Setters
     methods
         
         %Construtor
@@ -203,13 +203,13 @@ classdef CBR
             
             num_cilindros_sim.tabela_semelhancas = [
                 %   eight  five  four   six  three  twelve   two
-                     1.0   0.75  0.67   0.84  0.58   0.80    0.5% eight
-                     0.75  1.0   0.92   0.92  0.84   0.42    0.75% five
-                     0.67  0.92  1.0    0.84  0.92   0.34    0.84% four
-                     0.84  0.92  0.84   1.0   0.74   0.67    0.67% six
-                % three
-                % twelve
-                % two
+                     1.0   0.75  0.67   0.84  0.58   0.80    0.5  % eight
+                     0.75  1.0   0.92   0.92  0.84   0.42    0.75 % five
+                     0.67  0.92  1.0    0.84  0.92   0.34    0.84 % four
+                     0.84  0.92  0.84   1.0   0.74   0.5     0.67 % six
+                     0.58  0.84  0.92   0.74  1.0    0.25    0.92 % three
+                     0.80  0.42  0.34   0.5   0.25   1.0     0.17% twelve
+                     0.5   0.75  0.84   0.67  0.92   0.17    1.0% two
                 ];
         end
         
@@ -231,8 +231,6 @@ classdef CBR
                 % spfi
                 ];
         end
-        
-        
         
         
         %======== Calcular semelhanca entre dois valores/atributos ========

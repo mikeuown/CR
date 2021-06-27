@@ -11,7 +11,7 @@ classdef CBR
         novo_caso;
     end
     
-    %Construtor Getters e Setters
+    %Construtor, Getters e Setters
     methods
         
         %Construtor
@@ -113,7 +113,6 @@ classdef CBR
             biblioteca_casos.Properties.VariableNames{'Var26'} = 'price';
             
             disp('biblioteca carregada');
-            
         end
         
         
@@ -231,8 +230,6 @@ classdef CBR
                 % spfi
                 ];
         end
-        
-        
         
         
         %======== Calcular semelhanca entre dois valores/atributos ========
