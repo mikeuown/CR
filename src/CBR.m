@@ -175,8 +175,7 @@ classdef CBR
                 %   4wd  fwd  rwd 
                     1.0  0.5  0.5 % 4wd
                     0.5  1.0  0.3 % fwd
-                    0.5  0.3  1.0 % rwd
-              
+                    0.5  0.3  1.0 % rwd              
                 ];
         end
         
@@ -203,14 +202,14 @@ classdef CBR
             num_cilindros_sim.categorias = categorical({'eight', 'five', 'four', 'six', 'three', 'twelve', 'two'});
             
             num_cilindros_sim.tabela_semelhancas = [
-                %   eight  five  four   six  three  twelve    rotor
-                1.0           % eight
-                x         % five
-                % four
-                % six
-                % three
-                % twelve
-                % two
+                %   eight  five  four   six  three  twelve   two
+                     1.0   0.75  0.67   0.84  0.58   0.80    0.5  % eight
+                     0.75  1.0   0.92   0.92  0.84   0.42    0.75 % five
+                     0.67  0.92  1.0    0.84  0.92   0.34    0.84 % four
+                     0.84  0.92  0.84   1.0   0.74   0.5     0.67 % six
+                     0.58  0.84  0.92   0.74  1.0    0.25    0.92 % three
+                     0.80  0.42  0.34   0.5   0.25   1.0     0.17% twelve
+                     0.5   0.75  0.84   0.67  0.92   0.17    1.0% two
                 ];
         end
         
